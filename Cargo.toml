@@ -1,0 +1,21 @@
+[package]
+authors = ["Jason Ozias <jason.g.ozias@gmail.com>"]
+description = "Convenience macros for logging with an optional slog Logger."
+documentation = "https://docs.rs/slog-try"
+homepage = "https://github.com/rustyhorde/slog-try"
+keywords = [
+    "slog",
+    "macros",
+    "Logger",
+]
+license = "MIT/Apache-2.0"
+name = "slog-try"
+readme = "README.md"
+repository = "https://github.com/rustyhorde/slog-try"
+version = "0.1.0"
+
+[dependencies]
+
+[dev-dependencies]
+slog = { version = "2.0.9", features = ["max_level_trace", "release_max_level_trace"] }
+slog-term = "2.2.0"
