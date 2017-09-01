@@ -28,7 +28,7 @@
 //! try_info!(opt_logger.logger, #"imatag", "You will see me output!"; "opt" => "Some");
 //! # }
 //! ```
-
+#![deny(missing_docs)]
 #[cfg(test)]
 #[macro_use]
 extern crate slog;
@@ -131,6 +131,8 @@ mod tests {
     use slog_term;
 
     #[test]
+    // Note that theses aren't complete tests (output is not verified).  I have not figured
+    // out how to capture the output in a moved buffer (maybe thread_local!).
     fn trace() {
         let plain = slog_term::PlainSyncDecorator::new(::std::io::stdout());
         let logger = Logger::root(slog_term::FullFormat::new(plain).build().fuse(), o!());
