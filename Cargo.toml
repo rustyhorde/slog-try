@@ -12,7 +12,7 @@ license = "MIT/Apache-2.0"
 name = "slog-try"
 readme = "README.md"
 repository = "https://github.com/rustyhorde/slog-try"
-version = "0.1.0"
+version = "0.1.1"
 
 [dependencies]
 slog = { version = "=2.1.1", features = ["max_level_trace", "release_max_level_trace"] }
