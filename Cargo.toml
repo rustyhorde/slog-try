@@ -15,7 +15,8 @@ repository = "https://github.com/rustyhorde/slog-try"
 version = "0.1.1"
 
 [dependencies]
-slog = { version = "^2", features = ["max_level_trace", "release_max_level_trace"] }
+slog = "^2"
 
 [dev-dependencies]
+slog = { version = "^2", features = ["max_level_trace"] }
 slog-term = "^2"
