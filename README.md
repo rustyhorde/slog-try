@@ -7,7 +7,7 @@ Add `slog` and `slog-try` as a dependency in your Cargo.toml file.
 ```toml
 [dependencies]
 slog = "^2"
-slog-try = "^0.1"
+slog-try = "^0.2"
 ```
 
 ## Project setup
