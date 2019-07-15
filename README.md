@@ -1,3 +1,21 @@
+**Warning: This crate is not under active development and most likely deprecated.**
+
+Most APIs can be simplified throught slogs [`Discard`](https://docs.rs/slog/2.5.1/slog/struct.Discard.html) drain as it allows to replace the `Option` wrapped logger with an actual existing one. Like the `try_*` macros, in case of a none present logger, the discarding logger is going to drop all incoming messages.
+
+**How to initialize a discarding logger**
+
+```rust
+use slog::{Logger, Discard, o};
+
+fn main() {
+    let logger = Logger::root(Discard, o!());
+    info!(logger, "nothing happens");
+}
+```
+</details>
+
+---
+
 # slog-try
 Convenience macros for logging with an optional [slog](https://github.com/slog-rs/slog) Logger.
 
