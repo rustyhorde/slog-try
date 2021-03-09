@@ -43,6 +43,8 @@
     box_pointers,
     cenum_impl_drop_cast,
     clashing_extern_declarations,
+    clippy::all,
+    clippy::pedantic,
     coherence_leak_check,
     conflicting_repr_hints,
     confusable_idents,
@@ -52,7 +54,6 @@
     dead_code,
     deprecated,
     deprecated_in_future,
-    disjoint_capture_drop_reorder,
     drop_bounds,
     elided_lifetimes_in_paths,
     ellipsis_inclusive_range_patterns,
@@ -67,18 +68,15 @@
     incomplete_features,
     incomplete_include,
     indirect_structural_match,
-    ineffective_unstable_trait_impl,
     inline_no_sanitize,
     invalid_type_param_default,
     invalid_value,
     irrefutable_let_patterns,
     keyword_idents,
     late_bound_lifetime_arguments,
-    legacy_derive_helpers,
     macro_expanded_macro_exports_accessed_by_absolute_paths,
     macro_use_extern_crate,
     meta_variable_misuse,
-    missing_abi,
     missing_copy_implementations,
     missing_debug_implementations,
     missing_docs,
@@ -95,7 +93,6 @@
     non_snake_case,
     nontrivial_structural_match,
     non_upper_case_globals,
-    noop_method_call,
     order_dependent_trait_objects,
     overflowing_literals,
     overlapping_range_endpoints,
@@ -108,7 +105,6 @@
     redundant_semicolons,
     renamed_and_removed_lints,
     safe_packed_borrows,
-    semicolon_in_expressions_from_macros,
     single_use_lifetimes,
     soft_unstable,
     stable_features,
@@ -160,6 +156,30 @@
     warnings,
     where_clauses_object_safety,
     while_true
+)]
+#![cfg_attr(
+    not(nightly_lints),
+    deny(
+        broken_intra_doc_links,
+        invalid_codeblock_attributes,
+        invalid_html_tags,
+        missing_crate_level_docs,
+    )
+)]
+#![cfg_attr(
+    nightly_lints,
+    deny(
+        disjoint_capture_drop_reorder,
+        ineffective_unstable_trait_impl,
+        legacy_derive_helpers,
+        missing_abi,
+        noop_method_call,
+        semicolon_in_expressions_from_macros,
+        rustdoc::broken_intra_doc_links,
+        rustdoc::invalid_codeblock_attributes,
+        rustdoc::invalid_html_tags,
+        rustdoc::missing_crate_level_docs,
+    )
 )]
 
 #[cfg(test)]
