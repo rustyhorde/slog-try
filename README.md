@@ -1,41 +1,29 @@
-**Warning: This crate is not under active development and most likely deprecated.**
-
-Most APIs can be simplified throught slogs [`Discard`](https://docs.rs/slog/2.5.1/slog/struct.Discard.html) drain as it allows to replace the `Option` wrapped logger with an actual existing one. Like the `try_*` macros, in case of a none present logger, the discarding logger is going to drop all incoming messages.
-
-**How to initialize a discarding logger**
-
-```rust
-use slog::{Logger, Discard, o};
-
-fn main() {
-    let logger = Logger::root(Discard, o!());
-    info!(logger, "nothing happens");
-}
-```
-</details>
-
----
-
 # slog-try
 Convenience macros for logging with an optional [slog](https://github.com/slog-rs/slog) Logger.
 
+**NOTE** - See the bottom of this README for another method of using a Logger that doesn't require `Option<Logger>`
+
+## Current Release
+[![docs.rs](https://docs.rs/slog-try/badge.svg)](https://docs.rs/slog-try)
+[![Crates.io](https://img.shields.io/crates/v/slog-try.svg)](https://crates.io/crates/slog-try)
+[![Crates.io](https://img.shields.io/crates/l/slog-try.svg)](https://crates.io/crates/slog-try)
+[![Crates.io](https://img.shields.io/crates/d/slog-try.svg)](https://crates.io/crates/slog-try)
+[![codecov](https://codecov.io/gh/rustyhorde/slog-try/branch/master/graph/badge.svg?token=cBXro7o2UN)](https://codecov.io/gh/rustyhorde/slog-try)
+![CI](https://github.com/rustyhorde/slog-try/actions/workflows/main.yml/badge.svg)
+
 ## Required dependencies
-Add `slog` and `slog-try` as a dependency in your Cargo.toml file.
+Add `slog-try` as a dependency in your Cargo.toml file.
 
 ```toml
 [dependencies]
-slog = "^2"
-slog-try = "^0.2"
+slog-try = "0"
 ```
 
 ## Project setup
-Add the new dependencies as external crates into the `main.rs` or `lib.rs` file of your project:
+Add use statements for the macros you wish to use:
 
 ```rust
-#[macro_use]
-extern crate slog;
-#[macro_use]
-extern crate slog_try;
+use slog_try::try_info;
 ```
 
 ## Usage example
@@ -52,7 +40,7 @@ struct HasOptLogger {
 The macros contained in `slog-try` encapsulate the required boilerplate to use this logger without verifying whether the optional field actually contains a logger or not:
 
 ```rust
-let mut opt_logger= HasOptLogger { logger: None };
+let mut opt_logger = HasOptLogger { logger: None };
 
 // Try to log even if no logger exist
 try_info!(opt_logger.logger, "You won't see me output.  The logger is None."; "opt" => "None");
@@ -69,4 +57,17 @@ opt_logger.logger = Some(logger);
 // Call again with the new attached logger
 try_info!(opt_logger.logger, "You will see me output!"; "opt" => "Some");
 try_info!(opt_logger.logger, #"imatag", "You will see me output!"; "opt" => "Some");
+```
+
+## Using a Discard Logger
+You can use slogs [`Discard`](https://docs.rs/slog/2.5.1/slog/struct.Discard.html) drain in lieu of the `Option` wrapped logger. Like the `try_*` macros, in case of a none present logger, the discarding logger is going to drop all incoming messages.
+
+**How to initialize a discarding logger**
+```rust
+use slog::{Logger, Discard, o};
+
+fn main() {
+    let logger = Logger::root(Discard, o!());
+    info!(logger, "nothing happens");
+}
 ```
