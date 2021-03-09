@@ -16,7 +16,7 @@ Add `slog-try` as a dependency in your Cargo.toml file.
 
 ```toml
 [dependencies]
-slog-try = "0"
+slog-try = "1"
 ```
 
 ## Project setup
