@@ -54,8 +54,17 @@ jobs:
         uses: actions/cache@v2
         with:
           path: |
+            ~/.cargo/bin/cargo-tarpaulin*
             ~/.cargo/bin/cargo-*-all-features*
           key: ${{ runner.os }}-${{ matrix.rust }}-${{ hashFiles('**/Cargo.toml') }}
+      - name: 💾 Install (cargo-tarpaulin) 💾
+        uses: actions-rs/install@v0.1
+        if: matrix.os == 'ubuntu-latest'
+        with:
+          crate: cargo-tarpaulin
+          version: latest
+          use-tool-cache: true
+        continue-on-error: true
       - name: 💾 Install (cargo-all-features) 💾
         uses: actions-rs/install@v0.1
         with:
