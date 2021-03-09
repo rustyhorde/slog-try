@@ -3,6 +3,14 @@ Convenience macros for logging with an optional [slog](https://github.com/slog-r
 
 **NOTE** - See the bottom of this README for another method of using a Logger that doesn't require `Option<Logger>`
 
+## Current Release
+[![docs.rs](https://docs.rs/slog-try/badge.svg)](https://docs.rs/slog-try)
+[![Crates.io](https://img.shields.io/crates/v/slog-try.svg)](https://crates.io/crates/slog-try)
+[![Crates.io](https://img.shields.io/crates/l/slog-try.svg)](https://crates.io/crates/slog-try)
+[![Crates.io](https://img.shields.io/crates/d/slog-try.svg)](https://crates.io/crates/slog-try)
+[![codecov](https://codecov.io/gh/rustyhorde/slog-try/branch/master/graph/badge.svg?token=cBXro7o2UN)](https://codecov.io/gh/rustyhorde/slog-try)
+![CI](https://github.com/rustyhorde/slog-try/actions/workflows/main.yml/badge.svg)
+
 ## Required dependencies
 Add `slog-try` as a dependency in your Cargo.toml file.
 
