@@ -157,6 +157,7 @@
     where_clauses_object_safety,
     while_true
 )]
+#![cfg_attr(march_06, deny(noop_method_call))]
 #![cfg_attr(
     not(nightly_lints),
     deny(
@@ -173,7 +174,6 @@
         ineffective_unstable_trait_impl,
         legacy_derive_helpers,
         missing_abi,
-        noop_method_call,
         semicolon_in_expressions_from_macros,
         rustdoc::broken_intra_doc_links,
         rustdoc::invalid_codeblock_attributes,
