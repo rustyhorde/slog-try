@@ -161,9 +161,13 @@
     not(nightly_lints),
     deny(
         broken_intra_doc_links,
+        private_intra_doc_links,
+        missing_crate_level_docs,
+        missing_doc_code_examples,
+        private_doc_tests,
         invalid_codeblock_attributes,
         invalid_html_tags,
-        missing_crate_level_docs,
+        non_autolinks,
     )
 )]
 #![cfg_attr(
@@ -173,14 +177,18 @@
         ineffective_unstable_trait_impl,
         legacy_derive_helpers,
         missing_abi,
-        noop_method_call,
         semicolon_in_expressions_from_macros,
         rustdoc::broken_intra_doc_links,
+        rustdoc::private_intra_doc_links,
+        rustdoc::missing_crate_level_docs,
+        rustdoc::missing_doc_code_examples,
+        rustdoc::private_doc_tests,
         rustdoc::invalid_codeblock_attributes,
         rustdoc::invalid_html_tags,
-        rustdoc::missing_crate_level_docs,
+        rustdoc::non_autolinks,
     )
 )]
+#![cfg_attr(march_06, deny(noop_method_call))]
 
 #[cfg(test)]
 mod drain;
