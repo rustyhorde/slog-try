@@ -157,7 +157,6 @@
     where_clauses_object_safety,
     while_true
 )]
-#![cfg_attr(march_06, deny(noop_method_call))]
 #![cfg_attr(
     not(nightly_lints),
     deny(
@@ -189,6 +188,7 @@
         rustdoc::non_autolinks,
     )
 )]
+#![cfg_attr(march_06, deny(noop_method_call))]
 
 #[cfg(test)]
 mod drain;
