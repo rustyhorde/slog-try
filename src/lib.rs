@@ -31,11 +31,10 @@
 //! try_info!(opt_logger.logger, #"imatag", "You will see me output!"; "opt" => "Some");
 //! # }
 //! ```
+// rustc lints
 #![deny(
     absolute_paths_not_starting_with_crate,
-    ambiguous_associated_items,
     anonymous_parameters,
-    arithmetic_overflow,
     array_into_iter,
     asm_sub_register,
     bare_trait_objects,
@@ -43,12 +42,8 @@
     box_pointers,
     cenum_impl_drop_cast,
     clashing_extern_declarations,
-    clippy::all,
-    clippy::pedantic,
     coherence_leak_check,
-    conflicting_repr_hints,
     confusable_idents,
-    const_err,
     const_evaluatable_unchecked,
     const_item_mutation,
     dead_code,
@@ -62,51 +57,40 @@
     forbidden_lint_groups,
     function_item_references,
     illegal_floating_point_literal_pattern,
-    ill_formed_attribute_input,
     improper_ctypes,
     improper_ctypes_definitions,
     incomplete_features,
-    incomplete_include,
     indirect_structural_match,
     inline_no_sanitize,
-    invalid_type_param_default,
     invalid_value,
     irrefutable_let_patterns,
     keyword_idents,
     late_bound_lifetime_arguments,
-    macro_expanded_macro_exports_accessed_by_absolute_paths,
     macro_use_extern_crate,
     meta_variable_misuse,
+    missing_abi,
     missing_copy_implementations,
     missing_debug_implementations,
     missing_docs,
-    missing_fragment_specifier,
     mixed_script_confusables,
     mutable_borrow_reservation_conflict,
-    mutable_transmutes,
-    no_mangle_const_items,
     no_mangle_generic_items,
     non_ascii_idents,
     non_camel_case_types,
     non_fmt_panic,
     non_shorthand_field_patterns,
     non_snake_case,
-    nontrivial_structural_match,
     non_upper_case_globals,
-    order_dependent_trait_objects,
-    overflowing_literals,
+    nontrivial_structural_match,
     overlapping_range_endpoints,
     path_statements,
-    patterns_in_fns_without_body,
     pointer_structural_match,
     private_in_public,
     proc_macro_derive_resolution_fallback,
-    pub_use_of_private_extern_crate,
     redundant_semicolons,
     renamed_and_removed_lints,
-    safe_packed_borrows,
+    semicolon_in_expressions_from_macros,
     single_use_lifetimes,
-    soft_unstable,
     stable_features,
     temporary_cstring_as_ptr,
     trivial_bounds,
@@ -116,17 +100,14 @@
     tyvar_behind_raw_pointer,
     unaligned_references,
     uncommon_codepoints,
-    unconditional_panic,
     unconditional_recursion,
     uninhabited_static,
-    unknown_crate_types,
     unknown_lints,
     unnameable_test_items,
     unreachable_code,
     unreachable_patterns,
     unreachable_pub,
     unsafe_code,
-    // unsafe_op_in_unsafe_fn,
     unstable_features,
     unstable_name_collisions,
     unsupported_naked_functions,
@@ -151,44 +132,60 @@
     unused_results,
     unused_unsafe,
     unused_variables,
-    useless_deprecated,
     variant_size_differences,
-    warnings,
     where_clauses_object_safety,
     while_true
 )]
-#![cfg_attr(
-    not(nightly_lints),
-    deny(
-        broken_intra_doc_links,
-        private_intra_doc_links,
-        missing_crate_level_docs,
-        missing_doc_code_examples,
-        private_doc_tests,
-        invalid_codeblock_attributes,
-        invalid_html_tags,
-        non_autolinks,
-    )
-)]
+// nightly only lints
 #![cfg_attr(
     nightly_lints,
+    deny(disjoint_capture_drop_reorder, or_patterns_back_compat)
+)]
+// nightly or beta only lints
+#![cfg_attr(
+    any(beta_lints, nightly_lints),
     deny(
-        disjoint_capture_drop_reorder,
-        ineffective_unstable_trait_impl,
         legacy_derive_helpers,
-        missing_abi,
-        semicolon_in_expressions_from_macros,
+        noop_method_call,
+        proc_macro_back_compat,
+        unsafe_op_in_unsafe_fn,
+        unaligned_references,
+    )
+)]
+// beta or stable only lints
+#![cfg_attr(any(beta_lints, stable_lints), deny(safe_packed_borrows))]
+// stable only lints
+#![cfg_attr(
+    stable_lints,
+    deny(
+        broken_intra_doc_links,
+        invalid_codeblock_attributes,
+        invalid_html_tags,
+        missing_crate_level_docs,
+        missing_doc_code_examples,
+        non_autolinks,
+        private_doc_tests,
+        private_intra_doc_links,
+    )
+)]
+// clippy lints
+#![deny(clippy::all, clippy::pedantic)]
+#![allow(clippy::clippy::default_trait_access)]
+// rustdoc lints
+#![cfg_attr(
+    any(nightly_lints, beta_lints),
+    deny(
         rustdoc::broken_intra_doc_links,
-        rustdoc::private_intra_doc_links,
+        rustdoc::invalid_codeblock_attributes,
+        rustdoc::invalid_html_tags,
         rustdoc::missing_crate_level_docs,
         rustdoc::missing_doc_code_examples,
         rustdoc::private_doc_tests,
-        rustdoc::invalid_codeblock_attributes,
-        rustdoc::invalid_html_tags,
-        rustdoc::non_autolinks,
+        rustdoc::private_intra_doc_links,
     )
 )]
-#![cfg_attr(march_06, deny(noop_method_call))]
+#![cfg_attr(beta_lints, deny(rustdoc::non_autolinks))]
+#![cfg_attr(nightly_lints, deny(rustdoc::bare_urls))]
 
 #[cfg(test)]
 mod drain;
