@@ -137,10 +137,7 @@
     while_true
 )]
 // nightly only lints
-#![cfg_attr(
-    nightly_lints,
-    deny(disjoint_capture_drop_reorder, or_patterns_back_compat)
-)]
+#![cfg_attr(nightly_lints, deny(or_patterns_back_compat))]
 // nightly or beta only lints
 #![cfg_attr(
     any(beta_lints, nightly_lints),
@@ -170,7 +167,7 @@
 )]
 // clippy lints
 #![deny(clippy::all, clippy::pedantic)]
-#![allow(clippy::clippy::default_trait_access)]
+#![allow(clippy::default_trait_access)]
 // rustdoc lints
 #![cfg_attr(
     any(nightly_lints, beta_lints),
